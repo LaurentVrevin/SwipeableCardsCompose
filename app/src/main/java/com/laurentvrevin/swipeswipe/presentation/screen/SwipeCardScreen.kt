@@ -44,7 +44,6 @@ fun SwipeCardScreen(modifier: Modifier) {
         )
     }
 
-
     var leftSwipes by remember { mutableIntStateOf(0) }
     var rightSwipes by remember { mutableIntStateOf(0) }
 
