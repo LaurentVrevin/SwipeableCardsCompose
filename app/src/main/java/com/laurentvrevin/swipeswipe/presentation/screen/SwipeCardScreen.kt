@@ -1,8 +1,9 @@
 package com.laurentvrevin.swipeswipe.presentation.screen
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,6 +19,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
+
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -34,7 +38,7 @@ fun SwipeCardScreen(modifier: Modifier) {
                 CardData(
                     id = index + 1,
                     content = "Card ${index + 1}",
-                    color = randomColor() // Couleur aléatoire
+                    color = randomColor()
                 )
             }.toTypedArray()
         )
@@ -59,37 +63,58 @@ fun SwipeCardScreen(modifier: Modifier) {
             .fillMaxSize()
             .background(Color(0xFFEEEEEE))
     ) {
-
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
+        if (cards.isEmpty()) {
             Text(
-                text = "Swipes à gauche : $leftSwipes",
-                style = androidx.compose.ui.text.TextStyle(fontSize = 20.sp, color = Color.Red)
+                text = "List empty",
+                style = TextStyle(
+                    fontSize = 64.sp,
+                    fontWeight = FontWeight.ExtraBold,
+                    color = Color.Gray
+                ),
+                modifier = Modifier.align(Alignment.Center)
             )
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                text = "Swipes à droite : $rightSwipes",
-                style = androidx.compose.ui.text.TextStyle(fontSize = 20.sp, color = Color.Green)
-            )
-        }
+        } else {
 
-
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(top = 80.dp)
-        ) {
-            cards.reversed().forEach { card ->
-                SwipeableCard(
-                    cardData = card,
-                    modifier = Modifier.fillMaxSize(),
-                    onSwipeLeft = { onCardSwiped(card, SwipeDirection.LEFT) },
-                    onSwipeRight = { onCardSwiped(card, SwipeDirection.RIGHT) }
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 48.dp, start = 24.dp, end = 16.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(
+                    text = "Left : $leftSwipes",
+                    style = TextStyle(
+                        fontWeight = FontWeight.ExtraBold,
+                        fontSize = 20.sp,
+                        color = Color.Black
+                    )
                 )
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(
+                    text = "Right : $rightSwipes",
+                    style = TextStyle(
+                        fontWeight = FontWeight.ExtraBold,
+                        fontSize = 20.sp,
+                        color = Color.Black
+                    )
+                )
+            }
+
+
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(top = 80.dp)
+            ) {
+                cards.reversed().forEach { card ->
+                    SwipeableCard(
+                        cardData = card,
+                        modifier = Modifier.fillMaxSize(),
+                        onSwipeLeft = { onCardSwiped(card, SwipeDirection.LEFT) },
+                        onSwipeRight = { onCardSwiped(card, SwipeDirection.RIGHT) }
+                    )
+                }
             }
         }
     }

@@ -42,6 +42,8 @@ fun SwipeableCard(
 
     val swipeThreshold = 300f
 
+
+
     Box(
         modifier = modifier
             .offset { IntOffset(offsetX.value.roundToInt(), offsetY.value.roundToInt()) }
