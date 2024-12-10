@@ -27,7 +27,7 @@ import com.laurentvrevin.swipeswipe.util.randomColor
 
 @Composable
 fun SwipeCardScreen(modifier: Modifier) {
-    // Liste des cartes
+
     val cards = remember {
         mutableStateListOf(
             *List(30) { index ->
@@ -40,11 +40,11 @@ fun SwipeCardScreen(modifier: Modifier) {
         )
     }
 
-    // Compteurs pour les swipes gauche et droit
+
     var leftSwipes by remember { mutableIntStateOf(0) }
     var rightSwipes by remember { mutableIntStateOf(0) }
 
-    // Callback pour gérer le swipe des cartes
+
     fun onCardSwiped(card: CardData, direction: SwipeDirection) {
         cards.remove(card)
         when (direction) {
@@ -53,13 +53,13 @@ fun SwipeCardScreen(modifier: Modifier) {
         }
     }
 
-    // Écran principal
+
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(Color(0xFFEEEEEE))
     ) {
-        // Compteur en haut de l'écran
+
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -77,11 +77,11 @@ fun SwipeCardScreen(modifier: Modifier) {
             )
         }
 
-        // Pile de cartes au centre de l'écran
+
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(top = 80.dp) // Pour laisser de la place aux compteurs
+                .padding(top = 80.dp)
         ) {
             cards.reversed().forEach { card ->
                 SwipeableCard(

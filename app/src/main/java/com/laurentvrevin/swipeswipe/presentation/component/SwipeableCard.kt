@@ -74,13 +74,13 @@ fun SwipeableCard(
         Card(
             shape = RoundedCornerShape(16.dp),
             elevation = CardDefaults.cardElevation(4.dp),
-            colors = CardDefaults.cardColors(cardData.color), // Utiliser la couleur de la carte
+            colors = CardDefaults.cardColors(cardData.color),
             modifier = Modifier.padding(16.dp)
         ) {
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(cardData.color) // Appliquer la couleur de fond
+                    .background(cardData.color)
             ) {
                 Text(
                     text = cardData.content,
